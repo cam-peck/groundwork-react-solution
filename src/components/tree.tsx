@@ -32,7 +32,7 @@ export default function Tree({ name, children }: DataNode) {
   return (
     <section className="pl-12">
       {/* Node */}
-      <div>
+      <div onMouseDown={() => setIsDown(true)} onMouseMove={() => setIsDragging(true)}>
         <h4>{name}</h4>
         <input onChange={e => setValue(e.target.value)} value={value} onKeyDown={event => handleKeyDown(event)} className="border border-blue-500 rounded-md pl-2 pt-1 pb-1" type="text" placeholder='Add Child'/>
         { duplicateError && duplicateErrorText }
