@@ -5,7 +5,7 @@
     "url": "git+https://github.com/cam-peck/groundwork-react-solution.git"
   },
   "private": true,
-  "description": "Code exercise solutions.",
+  "description": "Solution to groundwork react take-home assessment.",
   "scripts": {
     "prepare": "husky install",
     "build": "webpack",

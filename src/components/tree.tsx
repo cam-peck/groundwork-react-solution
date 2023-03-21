@@ -4,7 +4,7 @@ import { DataNode } from '../data';
 export default function Tree({ name, children }: DataNode) {
 
   const [value, setValue] = useState('')
-  const [nodeChildren, setNodeChildren] = useState(children);
+  const [nodeChildren, setNodeChildren] = useState(children); 
   const [duplicateError, setDuplicateError] = useState(false);
 
   const [isDown, setIsDown] = useState(false);
@@ -38,8 +38,8 @@ export default function Tree({ name, children }: DataNode) {
         { duplicateError && duplicateErrorText }
       </div>
       {/* Node's Children */}
-      <div className="relative flex flex-col left-25 pl-12">
-        { nodeChildren.map((node: DataNode) => { return <Tree key={node.name} name={node.name} children={node.children} /> })  }
+      <div className="relative flex flex-col top-2 pl-12">
+        { nodeChildren.map((node: DataNode) => <Tree key={node.name} name={node.name} children={node.children} />) }
       </div>
     </section>
   )
