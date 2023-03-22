@@ -81,7 +81,7 @@ export default function Tree({ name, children }: DataNode) {
   const duplicateErrorText = <p className="text-red-500 italic">A node with that name already exists.</p>
 
   return (
-    <section className="pl-6 w-full max-w-3xl mb-2">
+    <section className="pl-6 w-full mb-2">
       {/* Node */}
       <div>
         <h4>{name}</h4>
