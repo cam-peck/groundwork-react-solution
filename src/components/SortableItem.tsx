@@ -1,11 +1,12 @@
 import React from 'react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
-
+import Tree from './tree';
+import { DataNode } from '../data';
 interface SortableItemProps {
   id: string
   key: string,
-  children: React.ReactNode
+  children: DataNode[] | []
 }
 
 export function SortableItem(props: SortableItemProps) {
@@ -23,8 +24,8 @@ export function SortableItem(props: SortableItemProps) {
   };
   
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {props.children}
+    <div style={style} ref={setNodeRef} {...attributes} {...listeners}>
+      <Tree name={props.id} children={props.children}/>
     </div>
   );
 }

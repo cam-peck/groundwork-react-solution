@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { DataNode } from '../data';
 import {
   DndContext, 
   closestCenter,
-  KeyboardSensor,
-  PointerSensor,
   useSensor,
   useSensors,
   DragEndEvent,
 } from '@dnd-kit/core';
 import {
   arrayMove,
+  rectSwappingStrategy,
   SortableContext,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
+import { KeyboardSensor, MouseSensor } from './CustomSensors';
 import {SortableItem} from './SortableItem';
 
 export default function Tree({ name, children }: DataNode) {
-
+  
   const [value, setValue] = useState('')
   const [nodeChildren, setNodeChildren] = useState(children); // using this instead of dndkit [items, setItems] hook
   const [duplicateError, setDuplicateError] = useState(false);
 
-
+  console.log(nodeChildren)
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(MouseSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -52,14 +51,11 @@ export default function Tree({ name, children }: DataNode) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
     if (!over) return
-
     const activeItem = nodeChildren.find((item) => item.name === active.id)
     const overItem = nodeChildren.find((item) => item.name === over.id)
-
     if (!activeItem || !overItem) {
       return
     }
-
     const activeIndex = nodeChildren.findIndex((item) => item.name === active.id)
     const overIndex = nodeChildren.findIndex((item) => item.name === over.id)
 
@@ -75,14 +71,16 @@ export default function Tree({ name, children }: DataNode) {
       {/* Node */}
       <div>
         <h4>{name}</h4>
-        <input onChange={e => setValue(e.target.value)} value={value} onKeyDown={event => handleKeyDown(event)} className="border border-blue-500 rounded-md pl-2 pt-1 pb-1" type="text" placeholder='Add Child'/>
+        <input data-no-dnd={true} onDragStart={e => {e.preventDefault(); e.stopPropagation();}} onChange={e => { console.log(e); setValue(e.target.value)}} value={value} onKeyDown={event => handleKeyDown(event)} className="border border-blue-500 rounded-md pl-2 pt-1 pb-1" type="text" placeholder='Add Child'/>
         { duplicateError && duplicateErrorText }
       </div>
       {/* Node's Children */}
       <div className="relative flex flex-col top-2 pl-12">
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={nodeChildren} strategy={verticalListSortingStrategy}>
-          { nodeChildren.map((node: DataNode) => <SortableItem key={node.name} id={node.name}><Tree key={node.name} name={node.name} children={node.children} /></SortableItem>) }
+        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
+          <SortableContext items={nodeChildren} strategy={rectSwappingStrategy}>
+          { 
+            nodeChildren.map((node: DataNode) => <SortableItem key={node.name} id={node.name} children={node.children} />) 
+          }
           </SortableContext>
         </DndContext>
       </div>
