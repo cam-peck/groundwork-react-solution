@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 import Tree from './tree';
@@ -6,7 +6,9 @@ import { DataNode } from '../data';
 interface SortableItemProps {
   id: string
   key: string,
-  children: DataNode[] | []
+  children: DataNode[] | [],
+  isOpacityEnabled: boolean,
+  isDragging: boolean
 }
 
 export function SortableItem(props: SortableItemProps) {
@@ -17,10 +19,14 @@ export function SortableItem(props: SortableItemProps) {
     transform,
     transition,
   } = useSortable({id: props.id});
+
+  const { isDragging, isOpacityEnabled } = props;
   
-  const style = {
+  const style: CSSProperties = {
     transform: CSS.Transform.toString(transform),
-    transition: transition || undefined
+    transition: transition || undefined,
+    opacity: isOpacityEnabled ? "0.4" : "1",
+    cursor: isDragging ? "grabbing" : "grab",
   };
   
   return (

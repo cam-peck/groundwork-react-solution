@@ -89,12 +89,12 @@ export default function Tree({ name, children }: DataNode) {
       <div className="relative flex flex-col top-2 pl-12">
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragStart={handleDragStart} onDragCancel={handleDragCancel} sensors={sensors}>
           <SortableContext items={nodeChildren} strategy={rectSortingStrategy}>
-          { 
-            nodeChildren.map((node: DataNode) => <SortableItem key={node.name} id={node.name} children={node.children} />) 
-          }
-          <DragOverlay style={{ transformOrigin: "0 0 " }}>
-            {activeItem ? <SortableItem key={activeItem.name} id={activeItem.name} children={activeItem.children} /> : null}
-          </DragOverlay>
+            { 
+              nodeChildren.map((node: DataNode) => <SortableItem key={node.name} id={node.name} children={node.children} isDragging={false} isOpacityEnabled={false} />) 
+            }
+            <DragOverlay style={{ transformOrigin: "0 0 " }}>
+              {activeItem ? <SortableItem key={activeItem.name} id={activeItem.name} children={activeItem.children} isDragging isOpacityEnabled/> : null}
+            </DragOverlay>
           </SortableContext>
         </DndContext>
       </div>

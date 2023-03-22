@@ -5,7 +5,7 @@ import Header from './components/header';
 
 export default function App() {
   return (
-    <main className="max-w-6xl mx-auto">
+    <main className="max-w-6xl pl-8">
       <Header />
       <Tree {...root}/>
     </main>
