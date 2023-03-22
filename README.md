@@ -57,7 +57,7 @@ npm run dev
 items: DataNode[] | []
 ```
 
-5. If you want to run tests, run...
+6. If you want to run tests, run...
 ```
 npm run tests
 ```
