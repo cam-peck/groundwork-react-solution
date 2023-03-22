@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState } from 'react';
 import { DataNode } from '../data';
 import {
   DndContext, 
@@ -6,10 +6,12 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
+  DragStartEvent,
+  DragOverlay
 } from '@dnd-kit/core';
 import {
   arrayMove,
-  rectSwappingStrategy,
+  rectSortingStrategy,
   SortableContext,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
@@ -21,9 +23,9 @@ export default function Tree({ name, children }: DataNode) {
   
   const [value, setValue] = useState('')
   const [nodeChildren, setNodeChildren] = useState(children); // using this instead of dndkit [items, setItems] hook
+  const [activeItem, setActiveItem] = useState<DataNode>();
   const [duplicateError, setDuplicateError] = useState(false);
 
-  console.log(nodeChildren)
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(KeyboardSensor, {
@@ -46,6 +48,15 @@ export default function Tree({ name, children }: DataNode) {
       setDuplicateError(false)
       setValue('')
     }
+  }
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    setActiveItem(nodeChildren.find(child => child.name === active.id))
+  }
+
+  const handleDragCancel = () => {
+    setActiveItem(undefined)
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -76,11 +87,14 @@ export default function Tree({ name, children }: DataNode) {
       </div>
       {/* Node's Children */}
       <div className="relative flex flex-col top-2 pl-12">
-        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
-          <SortableContext items={nodeChildren} strategy={rectSwappingStrategy}>
+        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragStart={handleDragStart} onDragCancel={handleDragCancel} sensors={sensors}>
+          <SortableContext items={nodeChildren} strategy={rectSortingStrategy}>
           { 
             nodeChildren.map((node: DataNode) => <SortableItem key={node.name} id={node.name} children={node.children} />) 
           }
+          <DragOverlay style={{ transformOrigin: "0 0 " }}>
+            {activeItem ? <SortableItem key={activeItem.name} id={activeItem.name} children={activeItem.children} /> : null}
+          </DragOverlay>
           </SortableContext>
         </DndContext>
       </div>

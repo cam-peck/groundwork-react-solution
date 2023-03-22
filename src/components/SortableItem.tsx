@@ -20,7 +20,7 @@ export function SortableItem(props: SortableItemProps) {
   
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: transition || undefined
   };
   
   return (
