@@ -37,14 +37,19 @@ git clone https://github.com/cam-peck/groundwork-react-solution.git
 cd groundwork-react-solution
 ```
 
-2. Make a copy of the provided `env.example` file. Name your copy `.env`. Change the `DATABASE_URL` to `runningFuze`.
+2. Make a copy of the provided `env.example` file.
 ```
-cp .env.example .env
+cp example.env .env
 ```
 
 3. Install all dependencies with NPM.
 ```
 npm install
+```
+
+3. Navigate to the SortableContext.d.ts file. Import DataNode into the file and replace lines 6 - 8 with...
+```
+DataNode[] | []
 ```
 
 4. Start the project. Once running, you can view the application by opening http://localhost:3000 in your browser.
