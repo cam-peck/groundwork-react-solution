@@ -15,16 +15,12 @@ export function SortableItem(props: SortableItemProps) {
   const {
     attributes,
     listeners,
-    setNodeRef,
-    transform,
-    transition,
+    setNodeRef
   } = useSortable({id: props.id});
 
   const { isDragging, isOpacityEnabled } = props;
   
   const style: CSSProperties = {
-    transform: CSS.Transform.toString(transform),
-    transition: transition || undefined,
     opacity: isOpacityEnabled ? "0.4" : "1",
     cursor: isDragging ? "grabbing" : "grab",
   };
