@@ -4,6 +4,9 @@ import {
   KeyboardSensor as LibKeyboardSensor
 } from '@dnd-kit/core'
 
+// modify sensors with "shouldHandleEvent function"
+// if an element has the 'data-no-dnd' property, that element is not draggable
+
 export class MouseSensor extends LibMouseSensor {
   static activators = [
     {
