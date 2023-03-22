@@ -47,14 +47,14 @@ cp example.env .env
 npm install
 ```
 
-3. Navigate to the SortableContext.d.ts file. Import DataNode into the file and replace lines 6 - 8 with...
-```
-items: DataNode[] | []
-```
-
 4. Start the project. Once running, you can view the application by opening http://localhost:3000 in your browser.
 ```
 npm run dev
+```
+
+5. Hover over the error thrown on the `Item` component on line 94 of `tree.tsx`. Navigate to SortableContext.d.ts and change the value of items to `DataNode[] | []` (across lines 6 - 8).
+```
+items: DataNode[] | []
 ```
 
 5. If you want to run tests, run...
