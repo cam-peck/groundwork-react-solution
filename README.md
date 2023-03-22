@@ -59,5 +59,5 @@ items: DataNode[] | []
 
 6. If you want to run tests, run...
 ```
-npm run tests
+npm run test
 ```
