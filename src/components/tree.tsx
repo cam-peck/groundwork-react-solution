@@ -95,10 +95,10 @@ export default function Tree({ name, children }: DataNode) {
             { 
               nodeChildren.map((node: DataNode) => <SortableItem key={node.name} id={node.name} children={node.children} isDragging={false} isOpacityEnabled={false} />) 
             }
-            <DragOverlay>
+          </SortableContext>
+          <DragOverlay>
               {activeItem ? <SortableItem key={activeItem.name} id={activeItem.name} children={activeItem.children} isDragging isOpacityEnabled/> : null}
             </DragOverlay>
-          </SortableContext>
         </DndContext>
       </div>
     </section>
