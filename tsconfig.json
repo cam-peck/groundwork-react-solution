@@ -3,7 +3,7 @@
     "jsx": "react",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "ES6",
     "lib": [
       "dom",
       "es6"
@@ -17,6 +17,7 @@
     "esModuleInterop": true,
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "es2015"
   ]
 }
