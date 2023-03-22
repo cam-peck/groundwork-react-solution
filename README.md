@@ -37,7 +37,7 @@ git clone https://github.com/cam-peck/groundwork-react-solution.git
 cd groundwork-react-solution
 ```
 
-2. Make a copy of the provided `env.example` file.
+2. Make a copy of the provided `example.env` file.
 ```
 cp example.env .env
 ```
@@ -49,7 +49,7 @@ npm install
 
 3. Navigate to the SortableContext.d.ts file. Import DataNode into the file and replace lines 6 - 8 with...
 ```
-DataNode[] | []
+items: DataNode[] | []
 ```
 
 4. Start the project. Once running, you can view the application by opening http://localhost:3000 in your browser.
