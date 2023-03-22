@@ -52,7 +52,7 @@ npm install
 npm run dev
 ```
 
-5. Hover over the error thrown on the `Item` component on line 94 of `tree.tsx`. Navigate to SortableContext.d.ts and change the value of items to `DataNode[] | []` (across lines 6 - 8).
+5. Hover over the error thrown on the `Item` component on line 94 of `tree.tsx`. Navigate to SortableContext.d.ts. Import the DataNode interface and change the value of items to `DataNode[] | []` (across lines 6 - 8).
 ```
 items: DataNode[] | []
 ```
