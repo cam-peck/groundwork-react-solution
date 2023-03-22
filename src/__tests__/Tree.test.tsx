@@ -49,4 +49,12 @@ describe('<Tree />', () => {
     expect(allInputs).toHaveLength(3);
 
   })
+
+  test('loads a tree with an empty root', async () => {
+    render(<Tree {...veryFullRoot}/>)
+
+    const nodes = screen.getAllByRole('textbox');
+    expect(nodes).toHaveLength(12);
+
+  });
 })

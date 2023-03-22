@@ -89,7 +89,7 @@ export default function Tree({ name, children }: DataNode) {
         { duplicateError && duplicateErrorText }
       </div>
       {/* Node's Children */}
-      <div className="relative flex flex-col top-2 pl-8">
+      <div className="relative flex flex-col md:flex-row top-2 pl-8">
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragStart={handleDragStart} onDragCancel={handleDragCancel} sensors={sensors}>
           <SortableContext items={nodeChildren} strategy={rectSortingStrategy}>
             { 
