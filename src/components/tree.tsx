@@ -23,7 +23,7 @@ export default function Tree({ name, children }: DataNode) {
   
   const [value, setValue] = useState('')
   const [nodeChildren, setNodeChildren] = useState(children); // using this instead of dndkit [items, setItems] hook
-  const [activeItem, setActiveItem] = useState<DataNode>();
+  const [activeItem, setActiveItem] = useState<DataNode | undefined>(undefined);
   const [duplicateError, setDuplicateError] = useState(false);
 
   const sensors = useSensors(
@@ -38,6 +38,9 @@ export default function Tree({ name, children }: DataNode) {
       for (let i = 0; i < nodeChildren.length; i++) {
         if (nodeChildren[i].name === value) {
           setDuplicateError(true);
+          setTimeout(() => {
+            setDuplicateError(false)
+          }, 5000)
           return;
         }
       }
