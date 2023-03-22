@@ -85,11 +85,11 @@ export default function Tree({ name, children }: DataNode) {
       {/* Node */}
       <div>
         <h4>{name}</h4>
-        <input data-no-dnd={true} onDragStart={e => {e.preventDefault(); e.stopPropagation();}} onChange={e => { console.log(e); setValue(e.target.value)}} value={value} onKeyDown={event => handleKeyDown(event)} className="border border-blue-500 rounded-md pl-2 pt-1 pb-1 w-full" type="text" placeholder='Add Child'/>
+        <input data-no-dnd={true} onDragStart={e => {e.preventDefault(); e.stopPropagation();}} onChange={e => { setValue(e.target.value)}} value={value} onKeyDown={event => handleKeyDown(event)} className="border border-blue-500 rounded-md pl-2 pt-1 pb-1 w-full" type="text" placeholder='Add Child'/>
         { duplicateError && duplicateErrorText }
       </div>
       {/* Node's Children */}
-      <div className="relative flex flex-col top-2 pl-8">
+      <div className="relative flex flex-col md:flex-row top-2 pl-8">
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragStart={handleDragStart} onDragCancel={handleDragCancel} sensors={sensors}>
           <SortableContext items={nodeChildren} strategy={rectSortingStrategy}>
             { 
